@@ -1,0 +1,21 @@
+---
+suite: Test RBAC templating for the webhook
+templates:
+  - webhook/clusterrole.yaml
+  - webhook/_helpers.tpl
+  - _helpers.tpl
+tests:
+  - it: ClusterRole should be rendered by default
+    template: webhook/clusterrole.yaml
+    asserts:
+      - hasDocuments:
+          count: 1
+  - it: When disabled, RBAC shouldn't be rendered at all
+    template: webhook/clusterrole.yaml
+    set:
+      webhook:
+        rbac:
+          create: false
+    asserts:
+      - hasDocuments:
+          count: 0

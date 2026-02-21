@@ -21,3 +21,6 @@ gen-docs: ## Generate helm documentation
 	./bin/helm-docs --template-files=./charts/db-operator/README.md.gotmpl \
 		--sort-values-order file --chart-to-generate=charts/db-operator
 	./bin/helm-docs --template-files=./charts/db-isntances/README.md.gotmpl --sort-values-order file --chart-to-generate=charts/db-instances
+
+gen-schema: ## Generate the json schema, not there yet
+	test -s $(LOCALBIN)/helm-schema || GOBIN=$(LOCALBIN_DIR) go install github.com/dadav/helm-schema/cmd/helm-schema@latest

@@ -11,10 +11,10 @@ tests:
       - hasDocuments:
           count: 0
 
-  - it: When crds are installed (by default), should be 3
+  - it: When crds are installed (by default), should be 4
     asserts:
       - hasDocuments:
-          count: 3
+          count: 4
       - isKind:
           of: CustomResourceDefinition
       - equal:
@@ -35,6 +35,12 @@ tests:
         documentSelector:
           path: metadata.name
           value: dbinstances.kinda.rocks
+      - equal:
+          path: metadata.name
+          value: dbbackups.kinda.rocks
+        documentSelector:
+          path: metadata.name
+          value: dbbackups.kinda.rocks
 
   - it: When keep is set to true (by default), helm annotation must be added
     asserts:
